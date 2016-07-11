@@ -33,6 +33,7 @@ function getPositions()
 						new Position(3, 'Mid'),
 						new Position(4, 'Adc'),
 						new Position(5, 'Sup')];
+		
 	}
 	return $positions;
 }
@@ -119,17 +120,19 @@ class Spell
 	public $id;
 	public $name;
 	public $positions;
+	public $scores;
 
-	public function __construct($id, $name, $positions)
+	public function __construct($id, $name, $positions, $scores)
 	{
 		$this->id = $id;
 		$this->name = $name;
 		$this->positions = $positions;
+		$this->scores = $scores;
 	}
 
 	public function __toString()
 	{
-		return 'Spell{id=' . $this->id . ',positions=' . json_encode($this->positions) . '}';
+		return 'Spell{id=' . $this->id . ',positions=' . json_encode($this->positions) . ',scores=' . json_encode($this->scores) . '}';
 	}
 
 	public function toHTML()
@@ -149,19 +152,19 @@ function getSpells()
 	if(!$spells)
 	{
 		$positions = getPositionsByName();
-		$spells = [	new Spell(21, 'barrier', [$positions['MID']]),
-					new Spell(13, 'clarity', [$positions['MID']]),
-					new Spell(01, 'cleanse', [$positions['MID']]),
-					new Spell(03, 'exhaust', [$positions['SUP']]),
-					new Spell(04, 'flash', []),		// no lane everyone takes it
-					new Spell(06, 'ghost', [$positions['TOP'], $positions['MID']]),//TODO unsure, mid or top first? + ghost may replace flash
-					new Spell(07, 'heal', [$positions['ADC'], $positions['MID']]),
-					new Spell(14, 'ignite', [$positions['MID'], $positions['TOP'], $positions['SUP']]),
-					new Spell(30, 'pororecall', []),// aram
-					new Spell(31, 'porothrow', []),	// aram
-					new Spell(11, 'smite', [$positions['JUNGLE']]),
-					new Spell(32, 'snowball', []),	// aram
-					new Spell(12, 'teleport', [$positions['TOP'], $positions['MID']])];
+		$spells = [	new Spell(21, 'barrier', [$positions['MID']], [10]),
+					new Spell(13, 'clarity', [$positions['MID']], [10]),
+					new Spell(01, 'cleanse', [$positions['MID']], [10]),
+					new Spell(03, 'exhaust', [$positions['SUP']], [10]),
+					new Spell(04, 'flash', [], [], []),		// no lane everyone takes it
+					new Spell(06, 'ghost', [$positions['TOP'], $positions['MID']], [5, 4]),//TODO unsure, mid or top first? + ghost may replace flash
+					new Spell(07, 'heal', [$positions['ADC'], $positions['MID']], [4, 4]),
+					new Spell(14, 'ignite', [$positions['MID'], $positions['TOP'], $positions['SUP']], [5, 4, 3]),
+					new Spell(30, 'pororecall', [], []),// aram
+					new Spell(31, 'porothrow', [], []),	// aram
+					new Spell(11, 'smite', [$positions['JUNGLE']], [10]),
+					new Spell(32, 'snowball', [], []),	// aram
+					new Spell(12, 'teleport', [$positions['TOP'], $positions['MID']], [10, 4])];
 	}
 	return $spells;
 }
@@ -253,10 +256,10 @@ function guessPlayer($player)
 	}
 	// spell1
 	foreach($player->spell1->positions as $i=>$pos)
-		$probabilityScores[$pos->id] += ($positionsAmount - $i) * (count($player->spell1->positions)==1?2:1);
+		$probabilityScores[$pos->id] += $player->spell1->scores[$i];
 	// spell2
 	foreach($player->spell2->positions as $i=>$pos)
-		$probabilityScores[$pos->id] += ($positionsAmount - $i) * (count($player->spell2->positions)==1?2:1);
+		$probabilityScores[$pos->id] += $player->spell2->scores[$i];
 	// sort
 	arsort($probabilityScores);// not actually needed given its use
 	return $probabilityScores;
