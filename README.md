@@ -1,13 +1,17 @@
 #LoLRoleDetect
 League of Legends Role Detection based on champion and spells
 
+## License
+[The MIT License (MIT)](https://github.com/Dragorn421/LoLRoleDetect/blob/master/LICENSE)  
+Copyright (c) 2016 Dragorn421
+
 ## Setup
 ### Introduction
 Welcome!  
 People are not supposed to have access to the include directory, you should deny it with configuration or `.htaccess`.  
 The only file you really need is include/roledetect.php, however it will only work if up-to-date static data
 exists, such as some that was generated using include/updatestatic.php (this file also generates data for
-javascript, you may want to remove that part).  
+javascript, you may want to remove that part, keep in mind the testing utility needs it).  
 
 ### updatestatic.php
 If using updatestatic.php don't forget to set the api key. You should put the path to the include directory
@@ -49,4 +53,4 @@ mapped to a summoner id instead of position id mapped to Player object.
 http://brallos.tk/lol/roledetect/ (not the same code as the test utility provided in this repository, but same core code)
 
 ## Examples
-See guess.php file!
+See [guess.php](https://github.com/Dragorn421/LoLRoleDetect/blob/master/guess.php) file!
