@@ -1,0 +1,23 @@
+#team {
+	font-size: 0;
+}
+
+.player {
+	display: inline-block;
+	margin: 5px;
+}
+
+.champion-icon {
+	width: 90px;
+	height: 90px;
+}
+
+.summoner-spells {
+	display: inline-block;
+}
+
+.summoner-spell {
+	display: block;
+	width: 45px;
+	height: 45px;
+}
