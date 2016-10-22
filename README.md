@@ -50,7 +50,7 @@ Convert resulting array of `reduceSolved()` so that each position **name** (top,
 mapped to a summoner id instead of position id mapped to Player object.
 
 ## Demo
-http://brallos.tk/lol/roledetect/ (not the same code as the test utility provided in this repository, but same core code)
+http://brallos.pro/lol/roledetect/ (not the same code as the test utility provided in this repository, but same core code)
 
 ## Examples
 See [guess.php](https://github.com/Dragorn421/LoLRoleDetect/blob/master/guess.php) file!
